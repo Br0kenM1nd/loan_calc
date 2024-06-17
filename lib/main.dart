@@ -1,22 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 import 'feature/loan_calc/view/page/loan_calc_page.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const LoanCalcApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LoanCalcApp extends StatelessWidget {
+  const LoanCalcApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const LoanCalcPage(),
+    return const GetCupertinoApp(
+      theme: CupertinoThemeData(),
+      home: LoanCalcPage(),
     );
   }
 }

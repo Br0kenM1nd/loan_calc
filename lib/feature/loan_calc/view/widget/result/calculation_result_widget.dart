@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../controller/loan_calc_controller.dart';
@@ -6,10 +6,9 @@ import '../../controller/loan_calc_ui_state.dart';
 import '../../page/loan_calc_details_page.dart';
 
 class CalculationResultWidget extends StatelessWidget {
-  const CalculationResultWidget({Key? key}) : super(key: key);
+  const CalculationResultWidget({super.key});
 
-  static const TextStyle headingStyle =
-      TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
+  static const TextStyle headingStyle = TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
   static const TextStyle descriptionStyle = TextStyle(fontSize: 16);
 
   @override
@@ -20,7 +19,7 @@ class CalculationResultWidget extends StatelessWidget {
         == LoanCalcUiState.empty => const SizedBox(),
         == LoanCalcUiState.error => Text(
             c.inputError.value,
-            style: const TextStyle(color: Colors.redAccent),
+            style: const TextStyle(color: Color(0xFFB00020)),
           ),
         == LoanCalcUiState.success => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,9 +34,9 @@ class CalculationResultWidget extends StatelessWidget {
                 style: descriptionStyle,
               ),
               Text(c.totalInterest.value, style: headingStyle),
-              ElevatedButton(
+              CupertinoButton(
                 onPressed: () => Get.to(() => const LoanCalcDetailsPage()),
-                child: Text('Подробнее'),
+                child: const Text('Подробнее'),
               ),
               const SizedBox(height: 32.0),
             ],

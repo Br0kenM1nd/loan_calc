@@ -12,9 +12,7 @@ class LoanCalculationResult {
     required this.calculationDate,
   });
 
-  double get totalPayment =>
-      payments.fold(0, (sum, payment) => sum + payment.totalAmount);
+  double get totalPayment => payments.fold(0, (sum, payment) => sum + payment.totalAmount);
 
-  double get totalInterest =>
-      payments.fold(0, (sum, payment) => sum + payment.interestAmount);
+  double get totalInterest => payments.fold(0, (sum, payment) => sum + payment.interestAmount);
 }

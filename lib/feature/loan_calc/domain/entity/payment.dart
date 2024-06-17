@@ -1,10 +1,10 @@
 class Payment {
-  final int number; 
-  final DateTime date; 
-  final double totalAmount; 
-  final double principalAmount; 
-  final double interestAmount; 
-  final double remainingPrincipal; 
+  final int number;
+  final DateTime date;
+  final double totalAmount;
+  final double principalAmount;
+  final double interestAmount;
+  final double remainingPrincipal;
 
   Payment({
     required this.number,

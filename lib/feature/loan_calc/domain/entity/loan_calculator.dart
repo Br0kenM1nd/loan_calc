@@ -1,7 +1,6 @@
 import 'dart:math';
 
-import 'package:loan_calc/utils/time_extension.dart';
-
+import '../../../../utils/time_extension.dart';
 import 'loan_calculation_result.dart';
 import 'loan_details.dart';
 import 'payment.dart';
@@ -17,8 +16,7 @@ class LoanCalculator {
   LoanCalculationResult calculate(LoanDetails loanDetails) {
     final payments = switch (loanDetails.paymentType) {
       PaymentType.annuity => calculateAnnuityPayments(loanDetails),
-      PaymentType.differentiated =>
-        calculateDifferentiatedPayments(loanDetails),
+      PaymentType.differentiated => calculateDifferentiatedPayments(loanDetails),
     };
     return LoanCalculationResult(
       loanDetails: loanDetails,
@@ -29,17 +27,17 @@ class LoanCalculator {
 
   List<Payment> calculateAnnuityPayments(LoanDetails loanDetails) {
     final monthlyInterestRate = loanDetails.interestRatePerYear / 12 / 100;
-    final annuityFactor = (monthlyInterestRate *
-            pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths)) /
-        (pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths) - 1);
+    final annuityFactor =
+        (monthlyInterestRate * pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths)) /
+            (pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths) - 1);
     final monthlyPayment = loanDetails.principal * annuityFactor;
-    double remainingPrincipal = loanDetails.principal;
+    var remainingPrincipal = loanDetails.principal;
 
-    List<Payment> payments = [];
+    var payments = <Payment>[];
 
     payments = _addFirstPayment(payments, loanDetails.principal);
 
-    for (int i = 1; i <= loanDetails.loanTermInMonths; i++) {
+    for (var i = 1; i <= loanDetails.loanTermInMonths; i++) {
       final interestPayment = remainingPrincipal * monthlyInterestRate;
       final principalPayment = monthlyPayment - interestPayment;
       remainingPrincipal -= principalPayment;
@@ -61,15 +59,14 @@ class LoanCalculator {
 
   List<Payment> calculateDifferentiatedPayments(LoanDetails loanDetails) {
     final monthlyInterestRate = loanDetails.interestRatePerYear / 12 / 100;
-    final monthlyPrincipal =
-        loanDetails.principal / loanDetails.loanTermInMonths;
-    double remainingPrincipal = loanDetails.principal;
+    final monthlyPrincipal = loanDetails.principal / loanDetails.loanTermInMonths;
+    var remainingPrincipal = loanDetails.principal;
 
-    List<Payment> payments = [];
+    var payments = <Payment>[];
 
     payments = _addFirstPayment(payments, loanDetails.principal);
 
-    for (int i = 1; i <= loanDetails.loanTermInMonths; i++) {
+    for (var i = 1; i <= loanDetails.loanTermInMonths; i++) {
       final interestPayment = remainingPrincipal * monthlyInterestRate;
       remainingPrincipal -= monthlyPrincipal;
 

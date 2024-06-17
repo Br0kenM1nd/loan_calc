@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class CalculateButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const CalculateButtonWidget(this.onPressed, {Key? key}) : super(key: key);
+  const CalculateButtonWidget(this.onPressed, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return CupertinoButton(
       onPressed: onPressed,
-      child: Text('Рассчитать сумму ежемесячного платежа'),
+      child: const Text('Рассчитать сумму ежемесячного платежа'),
     );
   }
 }

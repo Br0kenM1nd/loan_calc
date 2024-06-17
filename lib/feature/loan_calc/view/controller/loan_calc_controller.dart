@@ -23,9 +23,9 @@ class LoanCalcController extends GetxController {
   final totalInterest = ''.obs;
   final inputError = ''.obs;
 
-  var interest = .0;
-  var principal = .0;
-  var payments = <Payment>[];
+  double interest = .0;
+  double principal = .0;
+  List<Payment> payments = <Payment>[];
 
   // Вспомогательные
   final uiState = LoanCalcUiState.empty.obs;
@@ -72,12 +72,9 @@ class LoanCalcController extends GetxController {
     uiState.value = LoanCalcUiState.error;
   }
 
-  (double loanAmount, double interestRatePerYear, int loanTermInMonths)
-      parseValues() {
-    return (
-      double.parse(loanAmount.text),
-      double.parse(interestRatePerYear.text),
-      int.parse(loanTermInMonths.text),
-    );
-  }
+  (double loanAmount, double interestRatePerYear, int loanTermInMonths) parseValues() => (
+        double.parse(loanAmount.text),
+        double.parse(interestRatePerYear.text),
+        int.parse(loanTermInMonths.text),
+      );
 }

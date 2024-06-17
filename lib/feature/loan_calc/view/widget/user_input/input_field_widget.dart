@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class InputFieldWidget extends StatefulWidget {
@@ -14,8 +14,8 @@ class InputFieldWidget extends StatefulWidget {
     this.allowFloat = true,
     this.min = 1.0,
     this.max = 100.0,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<InputFieldWidget> createState() => _InputFieldWidgetState();
@@ -40,13 +40,11 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          decoration: InputDecoration(
-            isDense: true,
-            labelText: widget.labelText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
+        CupertinoTextFormFieldRow(
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: CupertinoColors.inactiveGray),
           ),
           keyboardType: TextInputType.number,
           inputFormatters: [
@@ -61,17 +59,19 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
         // Линейный ввод неудобен для больших значений
         // Логарифмический ввод не удобен, так как выдаёт неточные значения
         // Расчёт шага не универсален для разных значений
-        Slider.adaptive(
-          min: widget.min,
-          max: widget.max,
-          value: _currentValue,
-          onChanged: (newValue) {
-            setState(() {
-              _currentValue = _roundToStep(newValue, _getStepSize(newValue));
-              widget.controller.text =
-                  _currentValue.toStringAsFixed(widget.allowFloat ? 2 : 0);
-            });
-          },
+        SizedBox(
+          width: double.infinity,
+          child: CupertinoSlider(
+            min: widget.min,
+            max: widget.max,
+            value: _currentValue,
+            onChanged: (newValue) {
+              setState(() {
+                _currentValue = _roundToStep(newValue, _getStepSize(newValue));
+                widget.controller.text = _currentValue.toStringAsFixed(widget.allowFloat ? 2 : 0);
+              });
+            },
+          ),
         ),
       ],
     );
@@ -84,7 +84,5 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
         _ => 1e5,
       };
 
-  double _roundToStep(double value, double stepSize) {
-    return (value / stepSize).round() * stepSize;
-  }
+  double _roundToStep(double value, double stepSize) => (value / stepSize).round() * stepSize;
 }

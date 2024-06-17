@@ -8,8 +8,7 @@ import '../entity/loan_calculator.dart';
 import '../entity/loan_details.dart';
 import '../exception/validation_exception.dart';
 
-class LoanCalcUseCase
-    implements UseCase<DataState<LoanCalculationResult>, LoanDetails> {
+class LoanCalcUseCase implements UseCase<DataState<LoanCalculationResult>, LoanDetails> {
   const LoanCalcUseCase();
 
   @override
@@ -31,25 +30,21 @@ class LoanCalcUseCase
 
   @visibleForTesting
   Map<String, String> validateLoanDetails(LoanDetails? details) {
-    Map<String, String> errors = {};
+    final errors = <String, String>{};
     if (details == null) {
       errors['general'] = 'No LoanDetails provided';
       return errors;
     }
-    if (details.principal <= 0 ||
-        details.principal > LoanCalcConstant.loanAmountMax) {
-      errors['loanAmount'] =
-          'Сумма кредита должна быть в диапазоне\nот 1 до 1 000 000 000';
+    if (details.principal <= 0 || details.principal > LoanCalcConstant.loanAmountMax) {
+      errors['loanAmount'] = 'Сумма кредита должна быть в диапазоне\nот 1 до 1 000 000 000';
     }
     if (details.interestRatePerYear <= 0 ||
         details.interestRatePerYear > LoanCalcConstant.interestRatePerYearMax) {
-      errors['interestRatePerYear'] =
-          'Процентная ставка должна быть в диапазоне\nот 1 до 100';
+      errors['interestRatePerYear'] = 'Процентная ставка должна быть в диапазоне\nот 1 до 100';
     }
     if (details.loanTermInMonths <= 0 ||
         details.loanTermInMonths > LoanCalcConstant.loanTermInMonthsMax) {
-      errors['loanTermInMonths'] =
-          'Срок кредита должен быть в диапазоне\nот 1 до 600 месяцев';
+      errors['loanTermInMonths'] = 'Срок кредита должен быть в диапазоне\nот 1 до 600 месяцев';
     }
     return errors;
   }

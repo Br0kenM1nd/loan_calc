@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../../domain/constant/calc_loan_constant.dart';
@@ -7,7 +7,7 @@ import 'choose_payment_type_widget.dart';
 import 'input_field_widget.dart';
 
 class UserInputGroup extends StatelessWidget {
-  const UserInputGroup({Key? key}) : super(key: key);
+  const UserInputGroup({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class UserInputGroup extends StatelessWidget {
             max: LoanCalcConstant.loanTermInMonthsMax / 10,
           ),
           const SizedBox(height: 24.0),
-          Text('Тип ежемесячных платежей', style: TextStyle(fontSize: 20.0)),
+          const Text('Тип ежемесячных платежей', style: TextStyle(fontSize: 20.0)),
           const ChoosePaymentTypeWidget(),
         ],
       ),
