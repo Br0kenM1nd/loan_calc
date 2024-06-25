@@ -5,13 +5,17 @@ abstract class DataState<T> {
   const DataState({this.data, this.error});
 }
 
-class DataSuccess<T> extends DataState<T> {
-  const DataSuccess(T data) : super(data: data);
+class Success<T> extends DataState<T> {
+  const Success(T data) : super(data: data);
 
   @override
   String toString() => data.toString();
 }
 
-class DataFailed<T> extends DataState<T> {
-  DataFailed(exception, stackTrace) : super(error: (exception, stackTrace));
+class Failed<T> extends DataState<T> {
+  const Failed(Exception exception, StackTrace stackTrace) : super(error: (exception, stackTrace));
+}
+
+class Empty<T> extends DataState<T> {
+  const Empty() : super();
 }

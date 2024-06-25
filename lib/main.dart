@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import 'feature/loan_calc/view/page/loan_calc_page.dart';
+import 'feature/loan_calc/presentation/view/page/loan_calc_page.dart';
 
 void main() => runApp(const LoanCalcApp());
 

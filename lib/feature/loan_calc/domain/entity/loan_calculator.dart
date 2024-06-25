@@ -27,17 +27,15 @@ class LoanCalculator {
 
   List<Payment> calculateAnnuityPayments(LoanDetails loanDetails) {
     final monthlyInterestRate = loanDetails.interestRatePerYear / 12 / 100;
-    final annuityFactor =
-        (monthlyInterestRate * pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths)) /
-            (pow(1 + monthlyInterestRate, loanDetails.loanTermInMonths) - 1);
-    final monthlyPayment = loanDetails.principal * annuityFactor;
-    var remainingPrincipal = loanDetails.principal;
+    final (principal, loanTermInMonths) = (loanDetails.principal, loanDetails.loanTermInMonths);
+    final annuityFactor = (monthlyInterestRate * pow(1 + monthlyInterestRate, loanTermInMonths)) /
+        (pow(1 + monthlyInterestRate, loanTermInMonths) - 1);
+    final monthlyPayment = principal * annuityFactor;
+    var remainingPrincipal = principal;
 
-    var payments = <Payment>[];
+    final payments = <Payment>[_firstPayment(principal)];
 
-    payments = _addFirstPayment(payments, loanDetails.principal);
-
-    for (var i = 1; i <= loanDetails.loanTermInMonths; i++) {
+    for (var i = 1; i <= loanTermInMonths; i++) {
       final interestPayment = remainingPrincipal * monthlyInterestRate;
       final principalPayment = monthlyPayment - interestPayment;
       remainingPrincipal -= principalPayment;
@@ -59,12 +57,11 @@ class LoanCalculator {
 
   List<Payment> calculateDifferentiatedPayments(LoanDetails loanDetails) {
     final monthlyInterestRate = loanDetails.interestRatePerYear / 12 / 100;
-    final monthlyPrincipal = loanDetails.principal / loanDetails.loanTermInMonths;
-    var remainingPrincipal = loanDetails.principal;
+    final principal = loanDetails.principal;
+    final monthlyPrincipal = principal / loanDetails.loanTermInMonths;
+    var remainingPrincipal = principal;
 
-    var payments = <Payment>[];
-
-    payments = _addFirstPayment(payments, loanDetails.principal);
+    final payments = <Payment>[_firstPayment(principal)];
 
     for (var i = 1; i <= loanDetails.loanTermInMonths; i++) {
       final interestPayment = remainingPrincipal * monthlyInterestRate;
@@ -85,16 +82,12 @@ class LoanCalculator {
     return payments;
   }
 
-  List<Payment> _addFirstPayment(List<Payment> payments, double principal) {
-    final firstPayment = Payment(
-      number: 0,
-      date: now,
-      totalAmount: 0,
-      principalAmount: 0,
-      interestAmount: 0,
-      remainingPrincipal: principal,
-    );
-
-    return payments..insert(0, firstPayment);
-  }
+  Payment _firstPayment(double principal) => Payment(
+        number: 0,
+        date: now,
+        totalAmount: 0,
+        principalAmount: 0,
+        interestAmount: 0,
+        remainingPrincipal: principal,
+      );
 }

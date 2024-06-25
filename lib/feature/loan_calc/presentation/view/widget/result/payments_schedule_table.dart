@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-import '../../../domain/entity/payment.dart';
-import '../../view_model/loan_calc_view_model.dart';
+import '../../../data/model/payment_ui.dart';
 
 class PaymentsScheduleTable extends StatelessWidget {
-  final List<Payment> payments;
+  final List<PaymentUi> payments;
 
   const PaymentsScheduleTable(this.payments, {super.key});
-
-  static final currency = LoanCalcViewModel.currency;
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +25,15 @@ class PaymentsScheduleTable extends StatelessWidget {
             rows: payments.map((payment) {
               return DataRow(
                 cells: [
-                  DataCell(Text(payment.number.toString())),
-                  DataCell(Text(DateFormat('dd.MM.yyyy').format(payment.date))),
-                  DataCell(Text(currency.format(payment.totalAmount))),
-                  DataCell(Text(currency.format(payment.principalAmount))),
-                  DataCell(Text(currency.format(payment.interestAmount))),
-                  DataCell(Text(currency.format(payment.remainingPrincipal))),
+                  DataCell(Text(payment.number)),
+                  DataCell(Text(payment.date)),
+                  DataCell(Text(payment.totalAmount)),
+                  DataCell(Text(payment.principalAmount)),
+                  DataCell(Text(payment.interestAmount)),
+                  DataCell(Text(payment.remainingPrincipal)),
                 ],
               );
-            }).toList(),
+            }).toList(growable: false),
           ),
         ),
       ),

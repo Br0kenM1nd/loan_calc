@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../controller/loan_calc_controller.dart';
-import '../../controller/loan_calc_ui_state.dart';
+import '../../../flow/loan_calc_presenter.dart';
+import '../../../flow/loan_calc_ui_state.dart';
 import '../../page/loan_calc_details_page.dart';
 
 class CalculationResultWidget extends StatelessWidget {
@@ -13,10 +13,12 @@ class CalculationResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final c = Get.find<LoanCalcController>();
+    final c = Get.put(LoanCalcPresenterImpl());
     return Obx(
       () => switch (c.uiState.value) {
-        == LoanCalcUiState.empty => const SizedBox(),
+        == LoanCalcUiState.empty =>  SizedBox(
+          child: Obx(() => c.isShowBox.value ? const CupertinoActivityIndicator() : SizedBox()),
+        ),
         == LoanCalcUiState.error => Text(
             c.inputError.value,
             style: const TextStyle(color: Color(0xFFB00020)),

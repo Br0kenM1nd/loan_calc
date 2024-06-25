@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-class CalculateButtonWidget extends StatelessWidget {
+class CalculateButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const CalculateButtonWidget(this.onPressed, {super.key});
+  const CalculateButton(this.onPressed, {super.key});
 
   @override
   Widget build(BuildContext context) {

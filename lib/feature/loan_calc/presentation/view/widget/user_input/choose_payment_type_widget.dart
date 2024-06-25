@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/entity/payment_type.dart';
-import '../../controller/loan_calc_controller.dart';
+import '../../../../domain/entity/payment_type.dart';
+import '../../../flow/loan_calc_controller.dart';
 
 class ChoosePaymentTypeWidget extends StatelessWidget {
   const ChoosePaymentTypeWidget({super.key});

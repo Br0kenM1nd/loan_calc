@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../controller/loan_calc_controller.dart';
+import '../../flow/loan_calc_controller.dart';
 import '../widget/result/calculation_result_widget.dart';
 import '../widget/user_input/calculate_button_widget.dart';
 import '../widget/user_input/user_input_group.dart';
@@ -24,7 +24,7 @@ class LoanCalcPage extends StatelessWidget {
               // const SizedBox(height: 16.0),
               const CalculationResultWidget(),
               // const Spacer(),
-              CalculateButtonWidget(c.calculate),
+              CalculateButton(c.calculate),
             ],
           ),
         ),

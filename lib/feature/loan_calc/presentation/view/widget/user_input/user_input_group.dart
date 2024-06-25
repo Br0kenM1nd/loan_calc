@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/constant/calc_loan_constant.dart';
-import '../../controller/loan_calc_controller.dart';
+import '../../../../domain/constant/calc_loan_constant.dart';
+import '../../../flow/loan_calc_controller.dart';
 import 'choose_payment_type_widget.dart';
 import 'input_field_widget.dart';
 
@@ -19,7 +19,7 @@ class UserInputGroup extends StatelessWidget {
         children: [
           InputFieldWidget(
             labelText: 'сумма кредита',
-            controller: c.loanAmount,
+            controller: c.principal,
             min: LoanCalcConstant.loanAmountMin,
             max: LoanCalcConstant.loanAmountMax / 100,
           ),
