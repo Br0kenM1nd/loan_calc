@@ -25,9 +25,8 @@ class LoanCalculationResultUi {
     if (payments.isEmpty) return '-1';
 
     return switch (loanDetails.paymentType) {
-      PaymentType.annuity => currency.format(payments[1].totalAmount),
-      PaymentType.differentiated => '${currency.format(payments[1].totalAmount)}..'
-          '${currency.format(payments.last.totalAmount)}',
+      PaymentType.annuity => payments[1].totalAmount,
+      PaymentType.differentiated => '${payments[1].totalAmount}..${payments.last.totalAmount}',
     };
   }
 

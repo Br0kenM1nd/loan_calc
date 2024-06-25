@@ -6,13 +6,15 @@ import '../model/loan_calculation_result_ui.dart';
 import '../model/payment_ui.dart';
 
 abstract class LoanCalculationResultUiMapper {
+  static final currency = NumberFormat.currency(locale: 'ru_RU', symbol: '₽');
+
   static LoanCalculationResultUi fromEntity(LoanCalculationResult result) {
     return LoanCalculationResultUi(
       loanDetails: result.loanDetails,
       payments: _fromEntities(result.payments),
       calculationDate: DateFormat('dd.MM.yyyy').format(result.calculationDate),
-      totalPayment: result.totalPayment.toString(),
-      totalInterest: result.totalInterest.toString(),
+      totalPayment: currency.format(result.totalPayment),
+      totalInterest: currency.format(result.totalInterest),
     );
   }
 
@@ -20,10 +22,10 @@ abstract class LoanCalculationResultUiMapper {
     return payments.map((payment) => PaymentUi(
         number: payment.number.toString(),
         date: DateFormat('dd.MM.yyyy').format(payment.date),
-        totalAmount: payment.totalAmount.toString(),
-        principalAmount: payment.principalAmount.toString(),
-        interestAmount: payment.interestAmount.toString(),
-        remainingPrincipal: payment.remainingPrincipal.toString(),
+        totalAmount: currency.format(payment.totalAmount),
+        principalAmount: currency.format(payment.principalAmount),
+        interestAmount: currency.format(payment.interestAmount),
+        remainingPrincipal: currency.format(payment.remainingPrincipal),
       )).toList(growable: false);
   }
 }

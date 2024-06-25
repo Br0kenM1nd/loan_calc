@@ -30,8 +30,7 @@ class LoanCalcPresenterImpl extends GetxController implements LoanCalcPresenter 
   }
 
   void _setUiData(LoanCalculationResultUi ui) {
-    // monthlyPayment.value = ui.monthlyPayment;
-    monthlyPayment.value = 1000000.toString();
+    monthlyPayment.value = ui.monthlyPayment;
     totalPayment.value = ui.totalPayment;
     totalInterest.value = ui.totalInterest;
     payments = ui.payments;
