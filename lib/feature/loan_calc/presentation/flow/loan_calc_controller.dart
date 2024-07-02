@@ -15,7 +15,7 @@ class LoanCalcController extends GetxController {
   // Вспомогательные
   final formKey = GlobalKey<FormState>();
 
-  final calcLoanUseCase = LoanCalcUseCase();
+  final _calcLoanUseCase = LoanCalcUseCase();
 
   void calculate() {
     if (!_isValidInput()) return;
@@ -38,7 +38,7 @@ class LoanCalcController extends GetxController {
       paymentType: paymentType.value,
     );
 
-    calcLoanUseCase(loanDetails: loanDetails);
+    _calcLoanUseCase(loanDetails: loanDetails);
   }
 
   ({double principal, double interestRatePerYear, int loanTermInMonths}) _parseValues() => (

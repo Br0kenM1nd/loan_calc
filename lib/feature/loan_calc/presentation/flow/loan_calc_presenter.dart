@@ -1,13 +1,12 @@
 import 'package:get/get.dart';
 
 import '../../domain/entity/loan_calculation_result.dart';
-import '../../domain/presenter/loan_calc_presenter.dart';
 import '../data/mapper/loan_calculation_result_ui_mapper.dart';
 import '../data/model/loan_calculation_result_ui.dart';
 import '../data/model/payment_ui.dart';
 import 'loan_calc_ui_state.dart';
 
-class LoanCalcPresenterImpl extends GetxController implements LoanCalcPresenter {
+class LoanCalcPresenterImpl extends GetxController {
   // Выходные данные
   final monthlyPayment = ''.obs;
   final totalPayment = ''.obs;
@@ -21,7 +20,6 @@ class LoanCalcPresenterImpl extends GetxController implements LoanCalcPresenter 
   // Вспомогательные
   final uiState = LoanCalcUiState.empty.obs;
 
-  @override
   void showResult(LoanCalculationResult result) {
     isShowBox.value = true;
     final ui = LoanCalculationResultUiMapper.fromEntity(result);
@@ -36,7 +34,6 @@ class LoanCalcPresenterImpl extends GetxController implements LoanCalcPresenter 
     payments = ui.payments;
   }
 
-  @override
   void showError(String errorText) {
     inputError.value = errorText;
     uiState.value = LoanCalcUiState.error;

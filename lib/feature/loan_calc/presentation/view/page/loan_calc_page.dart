@@ -21,9 +21,8 @@ class LoanCalcPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const UserInputGroup(),
-              // const SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               const CalculationResultWidget(),
-              // const Spacer(),
               CalculateButton(c.calculate),
             ],
           ),
