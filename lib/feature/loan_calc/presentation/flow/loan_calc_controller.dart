@@ -17,19 +17,20 @@ class LoanCalcController extends GetxController {
 
   final calcLoanUseCase = LoanCalcUseCase();
 
-  bool isValidInput() => formKey.currentState!.validate();
-
   void calculate() {
-    if (!isValidInput()) return;
-    calculateLoan(parseValues());
+    if (!_isValidInput()) return;
+    _calculateLoan(_parseValues());
   }
 
-  void calculateLoan(
-      ({
-        double principal,
-        double interestRatePerYear,
-        int loanTermInMonths,
-      }) values) {
+  bool _isValidInput() => formKey.currentState!.validate();
+
+  void _calculateLoan(
+    ({
+      double principal,
+      double interestRatePerYear,
+      int loanTermInMonths,
+    }) values,
+  ) {
     final loanDetails = LoanDetails(
       principal: values.principal,
       interestRatePerYear: values.interestRatePerYear,
@@ -40,7 +41,7 @@ class LoanCalcController extends GetxController {
     calcLoanUseCase(loanDetails: loanDetails);
   }
 
-  ({double principal, double interestRatePerYear, int loanTermInMonths}) parseValues() => (
+  ({double principal, double interestRatePerYear, int loanTermInMonths}) _parseValues() => (
         principal: double.parse(principal.text),
         interestRatePerYear: double.parse(interestRatePerYear.text),
         loanTermInMonths: int.parse(loanTermInMonths.text),
